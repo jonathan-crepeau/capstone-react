@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Button, Modal, Form } from 'semantic-ui-react'
 
 import './Login.css';
@@ -8,7 +8,8 @@ import './Login.css';
 class LoginModal extends React.Component {
   state = {
     username: '',
-    password: ''
+    password: '',
+    open: false
   }
 
   inputChange = event => {
@@ -22,14 +23,22 @@ class LoginModal extends React.Component {
     axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, this.state, { withCredentials: true })
     .then(res => {
       console.log(res);
-      // this.props.setCurrentUser(res.data.data);
+      this.props.setCurrentUser(res.data.data);
+      this.props.history.push("/feed");
+      this.setState({open:false})
     })
     .catch(err => console.log(err));
   };
 
+  handleOpen = () => {
+    this.setState({open: true});
+  }
+
   render() {
     return (
-        <Modal trigger={<Link id="login">Login</Link>} basic size='small'>
+      <>
+      <Link id="login" onClick={this.handleOpen}>Login</Link>
+        <Modal open={this.state.open} basic size='small'>
           <Modal.Content>
             <Form inverted onSubmit={this.formSubmit}>
               <h2>Login</h2>
@@ -46,8 +55,9 @@ class LoginModal extends React.Component {
             </Form>
           </Modal.Content>
         </Modal>
+        </>
     );
   }
 }
 
-export default LoginModal;
+export default withRouter(LoginModal);

@@ -1,14 +1,17 @@
 import React from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 
-import './Hompeage.css';
+import './Homepage.css';
 
-class Homepage extends React.Component {
+const Homepage = props => (
+  <div className="container">
+    <h1>Homepage</h1>
+  </div>
 
 // render
 // background image
 // create Div with value prop & register button
 
-}
+);
 
 export default Homepage;

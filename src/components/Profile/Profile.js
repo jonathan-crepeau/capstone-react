@@ -1,12 +1,12 @@
 import React from 'react';
-import axios from 'axios'''
+// import axios from 'axios';
 
 import './Profile.css';
 
 class Profile extends React.Component {
   state = {
     myPosts: [],
-    purchased: []
+    purchased: [],
     profileInfo: []
   }
 
