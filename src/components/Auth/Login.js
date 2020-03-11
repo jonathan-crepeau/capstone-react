@@ -1,24 +1,33 @@
-import React from 'react';
-import { Button, Header, Icon, Modal } from 'semantic-ui-react'
+import React from 'react'
+import { Link } from 'react-router-dom';
+import { Button, Modal, Form } from 'semantic-ui-react'
 
-const LoginModal = () => (
-  <Modal trigger={<Button>Basic Modal</Button>} basic size='small'>
-    <Header icon='archive' content='Archive Old Messages' />
-    <Modal.Content>
-      <p>
-        Your inbox is getting full, would you like us to enable automatic
-        archiving of old messages?
-      </p>
-    </Modal.Content>
-    <Modal.Actions>
-      <Button basic color='red' inverted>
-        <Icon name='remove' /> No
-      </Button>
-      <Button color='green' inverted>
-        <Icon name='checkmark' /> Yes
-      </Button>
-    </Modal.Actions>
-  </Modal>
-)
+
+class LoginModal extends React.Component {
+  state = {
+    email: '',
+    password: ''
+  }
+
+  render() {
+    return (
+        <Modal trigger={<Link>Login</Link>} basic size='small'>
+          <Modal.Content>
+            <Form inverted>
+              <Form.Field>
+                <label>Username</label>
+                <input placeholder='Username' />
+              </Form.Field>
+              <Form.Field>
+                <label>Password</label>
+                <input placeholder='Password' />
+              </Form.Field>
+              <Button type='submit' color='green' circular='true' >Submit</Button>
+            </Form>
+          </Modal.Content>
+        </Modal>
+    );
+  }
+}
 
 export default LoginModal;

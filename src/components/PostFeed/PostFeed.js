@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import LoginModal from '../Auth/Login';
 import Navbar from '../Navbar/Navbar';
 import PostList from '../PostList/PostList';
 
@@ -26,6 +27,7 @@ class PostFeed extends React.Component {
     return (
       <div className="App">
         <Navbar className="nav-bar" />
+        <LoginModal className="login-modal" />
         <PostList posts={this.state.postContent} />
       </div>
     );
