@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import LoginModal from '../Auth/Login';
 import Navbar from '../Navbar/Navbar';
 import PostList from '../PostList/PostList';
 
