@@ -24,6 +24,7 @@ class LoginModal extends React.Component {
         <Modal trigger={<Link id="login">Login</Link>} basic size='small'>
           <Modal.Content>
             <Form inverted onSubmit={this.formSubmit}>
+              <h2>Login</h2>
               <Form.Field>
                 <label>Username</label>
                 <input id="username" name="username" type="text" onChange={this.inputChange} value={this.state.username} placeholder='Username' />
