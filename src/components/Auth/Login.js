@@ -6,8 +6,8 @@ import './Login.css';
 
 class LoginModal extends React.Component {
   state = {
-    password: '',
-    username: ''
+    username: '',
+    password: ''
   }
 
   inputChange = event => {
@@ -17,8 +17,7 @@ class LoginModal extends React.Component {
   };
 
   formSubmit = event => {
-    event.prevent
-  }
+  };
 
   render() {
     return (
@@ -33,8 +32,8 @@ class LoginModal extends React.Component {
                 <label>Password</label>
                 <input id="password" name="password" type="password" onChange={this.inputChange} value={this.state.password} placeholder='Password' />
               </Form.Field>
-              <Button className="submit-button" type='submit' color='green' circular='true'>Submit</Button><br/>
-              <a className="login-link" href="#">Already have an account? Click here to login</a>
+              <Button className="submit-button" type='submit' color='green' circular>Submit</Button><br/>
+              <a className="register-link" href="#">Don't have an account? Click here to register!</a>
             </Form>
           </Modal.Content>
         </Modal>

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
-import Login from '../Auth/Login';
+import LoginModal from '../Auth/Login'; 
+import RegisterModal from '../Auth/Register';
 
 import './Navbar.css';
 
@@ -25,7 +26,8 @@ const Navbar = props => {
         </Link>
       </div>
       <div className="nav__right">
-        <Login />
+        <LoginModal />
+        <RegisterModal />
       </div>
     </nav>
   );

@@ -1,9 +1,10 @@
-#login {
+#register {
   display: flex;
   align-items: center;
+  padding: 0px 10px 0px 10px;
 }
 
-.register-link {
+.login-link {
   display: flex;
   justify-content: center;
   margin: 10px;
