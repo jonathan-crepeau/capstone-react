@@ -40,3 +40,9 @@ nav {
   justify-content: center;
   align-content: center;
 }
+
+.linkalign {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}

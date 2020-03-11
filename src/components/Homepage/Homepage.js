@@ -3,15 +3,19 @@ import React from 'react';
 
 import './Homepage.css';
 
-const Homepage = props => (
-  <div className="container">
-    <h1>Homepage</h1>
-  </div>
+class Homepage extends React.Component {
 
-// render
+
+  render() {
+    return (
+      <div className="container">
+        <h1>Homepage!!</h1>
+      </div>
+
+    );
+  }
+}
 // background image
 // create Div with value prop & register button
-
-);
 
 export default Homepage;

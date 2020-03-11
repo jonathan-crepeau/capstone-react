@@ -11,16 +11,16 @@ class Navbar extends React.Component {
   render() {
     return (
       <nav>
-        <div className="nav__left">
-          <Link to="/">
-            Capstone Logo
-          </Link>
-        </div>
         {this.props.currentUser ? (
           <>
+            <div className="nav__left">
+              <Link to="/feed">
+                Capstone Logo
+              </Link>
+            </div>
             <div className="nav__center">
-              <Link className="center" to="/search">
-                Search
+              <Link className="center" to="/feed">
+                Post Feed
               </Link>
               <Link className="center" to="/favorites">
                 Favorites
@@ -30,15 +30,25 @@ class Navbar extends React.Component {
               </Link>
             </div>
             <div className="nav__right">
-              <a href="/profile">{this.props.currentUsername}</a>
-              <Link onClick={this.props.logout} >Logout</Link>
+              <Link className="center linkalign" to="/profile">Hi {this.props.currentUsername}!</Link><br/>
+              <Link className="center linkalign" onClick={this.props.logout}>Logout</Link>
             </div>
           </>
         ) : (
-        <div className="nav__right">
-          <LoginModal currentUser={this.props.currentUser} setCurrentUser={this.props.setCurrentUser} />
-          <RegisterModal />
-        </div>
+          <>
+            <div className="nav__left">
+              <Link to="/">
+                Capstone Logo
+              </Link>
+            </div>
+            <div className="nav__center">
+              <p></p>
+            </div>
+            <div className="nav__right">
+              <LoginModal currentUser={this.props.currentUser} setCurrentUser={this.props.setCurrentUser} />
+              <RegisterModal />
+            </div>
+          </>
         )}
       </nav>
     );

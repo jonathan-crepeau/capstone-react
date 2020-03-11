@@ -8,9 +8,16 @@ import PostFeed from '../components/PostFeed/PostFeed';
 import Profile from '../components/Profile/Profile';
 
 
-export default () => (
+export default ({currentUser}) => (
   <Switch>
-    <Route exact path="/" component={Homepage} />
+    {!currentUser} ?
+    <Route 
+    exact path="/" 
+    render={() => (
+      <Homepage currentUser={currentUser} />
+    )}
+     />
+    :
     <Route path="/favorites" component={Favorites} />
     <Route path="/orders" component={Orders} />
     <Route path="/feed" component={PostFeed} />
