@@ -1,0 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.center {
+  padding: 0px 10px 0px 10px;
+}
+
+nav {
+  height: 10vh;
+  width: 100%;
+  background-color: plum;
+  padding: .3em;
+  display: flex;
+}
+
+.nav__left {
+  width: 33%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav__center {
+  width: 33%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.nav__right {
+  width: 33%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}

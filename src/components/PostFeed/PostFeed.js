@@ -27,7 +27,6 @@ class PostFeed extends React.Component {
     return (
       <div className="App">
         <Navbar className="nav-bar" />
-        <LoginModal className="login-modal" />
         <PostList posts={this.state.postContent} />
       </div>
     );

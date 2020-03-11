@@ -1,0 +1,15 @@
+#login {
+  display: flex;
+  align-items: center;
+}
+
+.submit-button {
+  display: flex;
+  justify-content: center;
+}
+
+.login-link {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}

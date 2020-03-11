@@ -5,13 +5,13 @@ import './App.css';
 
 class App extends React.Component {
   state = {
-    // currentUser: localStorage.getItem('uid');
+    currentUser: localStorage.getItem('uid');
   }
 
-  // setCurrentUser = userId => {
-  //   this.setState({ currentUser: session.currentUser.id });
-  //   localStorage.setItem('uid', session.currentUser.id);
-  // };
+  setCurrentUser = userId => {
+    this.setState({ currentUser: session.currentUser.id });
+    localStorage.setItem('uid', session.currentUser.id);
+  };
 
   render() {
     return (
