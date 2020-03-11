@@ -12,6 +12,10 @@ class EditProfile extends React.Component {
     zipcode: '',
   }
 
+  // for serving data in the form
+  // axios call
+  // setState({username: res.data.username (or whatever is in the response})
+
   inputChange = event => {
     this.setState({
       [event.target.name]: event.target.value

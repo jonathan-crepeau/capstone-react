@@ -11,6 +11,7 @@ class PostFeed extends React.Component {
 
   componentDidMount() {
     console.log('Axios call for all posts');
+    // "withCredentials" serves the cookie, so I don't have to pass req.session.currentUser.id to the db.collection.find routes
     axios.get(`${process.env.REACT_APP_API_URL}/posts`, { withCredentials: true })
       .then(res => {
         console.log(res)
