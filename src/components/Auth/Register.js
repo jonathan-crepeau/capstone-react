@@ -51,7 +51,7 @@ class RegisterModal extends React.Component {
               <input id="zipcode" name="zipcode" type="text" placeholder="Zipcode" onChange={this.inputChange} value={this.state.zipcode} />
             </Form.Field>
             <Button className="submit-button" type="submit" color="green" circular>Submit</Button><br/>
-            <a className="login-link" href="#">Already have an account? Click here to login!</a>
+            <a className="login-link" href="/">Already have an account? Click here to login!</a>
           </Form>
         </Modal.Content>
       </Modal>

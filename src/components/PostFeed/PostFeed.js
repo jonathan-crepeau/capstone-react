@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import Navbar from '../Navbar/Navbar';
 import PostList from '../PostList/PostList';
 import AddPost from '../AddPost/AddPost';
 import EditProfile from '../EditProfile/EditProfile';
@@ -27,7 +26,6 @@ class PostFeed extends React.Component {
   render() {
     return (
       <div className="App">
-        <Navbar className="nav-bar" />
         <AddPost />
         <EditProfile />
         <PostList posts={this.state.postContent} />

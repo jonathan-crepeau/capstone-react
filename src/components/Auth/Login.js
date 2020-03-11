@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Button, Modal, Form } from 'semantic-ui-react'
 
@@ -17,6 +18,13 @@ class LoginModal extends React.Component {
   };
 
   formSubmit = event => {
+    event.preventDefault();
+    axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, this.state, { withCredentials: true })
+    .then(res => {
+      console.log(res);
+      // this.props.setCurrentUser(res.data.data);
+    })
+    .catch(err => console.log(err));
   };
 
   render() {
@@ -34,7 +42,7 @@ class LoginModal extends React.Component {
                 <input id="password" name="password" type="password" onChange={this.inputChange} value={this.state.password} placeholder='Password' />
               </Form.Field>
               <Button className="submit-button" type='submit' color='green' circular>Submit</Button><br/>
-              <a className="register-link" href="#">Don't have an account? Click here to register!</a>
+              <a className="register-link" href="/">Don't have an account? Click here to register!</a>
             </Form>
           </Modal.Content>
         </Modal>
