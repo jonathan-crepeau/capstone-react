@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Navbar from '../Navbar/Navbar';
 import PostList from '../PostList/PostList';
+import AddPost from '../AddPost/AddPost';
 
 class PostFeed extends React.Component {
   state = {
@@ -26,6 +27,7 @@ class PostFeed extends React.Component {
     return (
       <div className="App">
         <Navbar className="nav-bar" />
+        <AddPost />
         <PostList posts={this.state.postContent} />
       </div>
     );
