@@ -28,7 +28,6 @@ class PostFeed extends React.Component {
     return (
       <div className="App">
         <AddPost />
-        <EditProfile />
         <PostList posts={this.state.postContent} />
       </div>
     );

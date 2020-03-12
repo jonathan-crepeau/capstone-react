@@ -1,0 +1,13 @@
+.post {
+  border: black 2px solid;
+}
+
+#favoriteButton {
+  background-color: #FF6DDA;
+  color: black;
+}
+
+#purchaseButton {
+  background-color: #87FF6E;
+  color: black;
+}
