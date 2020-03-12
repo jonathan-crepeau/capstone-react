@@ -6,46 +6,18 @@ import './Post.css';
 
 class Post extends React.Component {
   state = {
-    originalPostId: null,
-    postAuthorId: null,
-    title: null,
-    userDescription: null,
-    plantType: null,
-    waterNeeds: null,
-    lightNeeds: null,
-    size: null,
-    cost: null,
-    favID: null,
+    originalPostId: this.props.post._id,
+    postAuthorId: this.props.post.user,
+    title: this.props.post.title,
+    userDescription: this.props.post.userDescription,
+    plantType: this.props.post.plantType,
+    waterNeeds: this.props.post.waterNeeds,
+    lightNeeds: this.props.post.lightNeeds,
+    size: this.props.post.size,
+    cost: this.props.post.cost,
   }
 
-  // NOTE - Favorite Button Click Event Functionality
   handleFavorite = async (event) => {
-    console.log('favorited!');
-    this.setState({ originalPostId: null });
-    let parentDiv = event.target.closest('.postInteraction');
-    // console.log(parentDiv)
-    let postID = parentDiv.firstElementChild.textContent;
-    console.log(postID)
-    this.setState({ originalPostId: postID });
-    let rez = await axios.get(`${process.env.REACT_APP_API_URL}/posts/${this.state.originalPostId}`, { withCredentials: true })
-      .then(rez => {
-        console.log('rez', rez)
-        this.setState({
-          postAuthorId: rez.data.user,
-          title: rez.data.title,
-          userDescription: rez.data.userDescription,
-          plantType: rez.data.plantType,
-          waterNeeds: rez.data.waterNeeds,
-          lightNeeds: rez.data.lightNeeds,
-          size: rez.data.size,
-          cost: rez.data.cost,
-        })
-        this.createFavorite();
-      })
-      .catch(err => console.log(err));
-  };
-
-  createFavorite = async (event) => {
     let res = await axios.post(`${process.env.REACT_APP_API_URL}/favorites/create`, this.state, { withCredentials: true })
       .then(res => console.log('createFav', res))
       .catch(err => console.log(err));
@@ -53,53 +25,17 @@ class Post extends React.Component {
   
   // NOTE - Purchase Button Event Listener Functionality
   handlePurchase = async (event) => {
-    console.log('purchased!')
-    this.setState({ originalPostId: null });
-    let parentDiv = event.target.closest('.postInteraction');
-    let postID = parentDiv.firstElementChild.textContent;
-    console.log(postID);
-    this.setState({ originalPostId: postID });
-    let rez = await axios.get(`${process.env.REACT_APP_API_URL}/posts/${this.state.originalPostId}`, { withCredentials: true })
-      .then(rez => {
-        console.log('orderRez', rez);
-        this.setState({
-          postAuthorId: rez.data.user,
-          title: rez.data.title,
-          userDescription: rez.data.userDescription,
-          plantType: rez.data.plantType,
-          waterNeeds: rez.data.waterNeeds,
-          lightNeeds: rez.data.lightNeeds,
-          size: rez.data.size,
-          cost: rez.data.cost,
-        })
-        this.createOrder();
-      })
-      .catch(err => console.log(err));;
-  };
-
-  createOrder = async () => {
     let res = await axios.post(`${process.env.REACT_APP_API_URL}/orders/create`, this.state, { withCredentials: true })
       .then(res => {
         console.log('createOrd', res)
-        this.orderFindFavorite();
-      })
-      .catch(err => console.log(err));
-  };
-
-  orderFindFavorite = () => {
-    axios.get(`${process.env.REACT_APP_API_URL}/favorites/${this.state.originalPostId}`, { withCredentials: true })
-      .then(res => {
-        console.log('foundFav', res);
-        let favID = res.data[0]._id;
-        this.setState({ favID: favID });
-        console.log('stateFavID', this.state.favID);
+        // console.log('stateOrgPostID', this.state.originalPostId)
         this.orderDeleteFavorite();
       })
       .catch(err => console.log(err));
   };
 
   orderDeleteFavorite = () => {
-    axios.delete(`${process.env.REACT_APP_API_URL}/favorites/${this.state.favID}`, { withCredentials: true })
+    axios.delete(`${process.env.REACT_APP_API_URL}/favorites/${this.state.originalPostId}`, { withCredentials: true })
     .then(res => console.log('deletedFav', res))
     .catch(err => console.log(err));
   };
