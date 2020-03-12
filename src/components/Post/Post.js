@@ -6,23 +6,64 @@ import './Post.css';
 
 class Post extends React.Component {
   state = {
-    favorites: null
+    originalPostId: null,
+    postAuthorId: null,
+    title: null,
+    userDescription: null,
+    plantType: null,
+    waterNeeds: null,
+    lightNeeds: null,
+    size: null,
+    cost: null
   }
-  
-  handleFavorite = event => {
+
+  handleFavorite = async (event) => {
     console.log('favorited!');
-    this.setState({ favorites: null });
+    this.setState({ originalPostId: null });
     let parentDiv = event.target.closest('.postInteraction');
-    console.log(parentDiv)
-    let postId = parentDiv.firstElementChild.textContent;
-    console.log(postId)
-    this.setState({ favorites: postId });
-    axios.post(`${process.env.REACT_APP_API_URL}/favorites/create`, this.state, { withCredentials: true })
-      .then(res => {
-        console.log(res);
+    // console.log(parentDiv)
+    let postID = parentDiv.firstElementChild.textContent;
+    console.log(postID)
+    this.setState({ originalPostId: postID });
+    let rez = await axios.get(`${process.env.REACT_APP_API_URL}/posts/${this.state.originalPostId}`, { withCredentials: true })
+      .then(rez => {
+        console.log('rez', rez)
+        this.setState({
+          postAuthorId: rez.data.user,
+          title: rez.data.title,
+          userDescription: rez.data.userDescription,
+          plantType: rez.data.plantType,
+          waterNeeds: rez.data.waterNeeds,
+          lightNeeds: rez.data.lightNeeds,
+          size: rez.data.size,
+          cost: rez.data.cost,
+        })
+        this.createFavorite();
       })
       .catch(err => console.log(err));
   };
+
+  createFavorite = async (event) => {
+    let res = await axios.post(`${process.env.REACT_APP_API_URL}/favorites/create`, this.state, { withCredentials: true })
+      .then(res => console.log('createFav', res))
+      .catch(err => console.log(err));
+  }
+  
+  // handleFavorite = event => {
+  //   console.log('favorited!');
+  //   this.setState({ favorites: null });
+  //   let parentDiv = event.target.closest('.postInteraction');
+  //   console.log(parentDiv)
+  //   let postId = parentDiv.firstElementChild.textContent;
+  //   console.log(postId)
+  //   this.setState({ favorites: postId });
+  //   axios.post(`${process.env.REACT_APP_API_URL}/favorites/create`, this.state, { withCredentials: true })
+  //     .then(res => {
+  //       console.log(res);
+  //     })
+  //     .catch(err => console.log(err));
+  // };
+
   // handlefavorite (function)
   // setState favorite to null
   // select object (get ID of post)

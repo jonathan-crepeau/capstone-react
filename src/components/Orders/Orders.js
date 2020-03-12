@@ -7,7 +7,13 @@ import './Orders.css';
 
 class Orders extends React.Component {
   state = {
-    postContent: []
+    // postContent: []
+    postId: '',
+    sellerId: '',
+    sellerUsername: '',
+    sellerPublicEmail: '',
+    buyerUsername: '',
+    buyerPublicEmail: '',
   }
 
   componentDidMount() {
