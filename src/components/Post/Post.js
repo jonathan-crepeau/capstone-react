@@ -36,8 +36,19 @@ class Post extends React.Component {
 
   orderDeleteFavorite = () => {
     axios.delete(`${process.env.REACT_APP_API_URL}/favorites/${this.state.originalPostId}`, { withCredentials: true })
-    .then(res => console.log('deletedFav', res))
+    .then(res => {
+      console.log('deletedFav', res)
+      this.orderDeletePost();
+    })
     .catch(err => console.log(err));
+  };
+
+  orderDeletePost = () => {
+    axios.delete(`${process.env.REACT_APP_API_URL}/posts/${this.state.originalPostId}`, { withCredentials: true })
+      .then(res => {
+        console.log('deletedPost', res)
+      })
+      .catch(err => console.log(err));
   };
 
   render() {
