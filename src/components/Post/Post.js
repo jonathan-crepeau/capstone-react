@@ -18,7 +18,9 @@ class Post extends React.Component {
     console.log(postId)
     this.setState({ favorites: postId });
     axios.post(`${process.env.REACT_APP_API_URL}/favorites/create`, this.state, { withCredentials: true })
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(res);
+      })
       .catch(err => console.log(err));
   };
   // handlefavorite (function)

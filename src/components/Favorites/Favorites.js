@@ -24,9 +24,9 @@ class Favorites extends React.Component {
 
   render() {
     return (
-      <div className='container'>
-        <PostList posts={this.state.postContent} />
-      </div>
+        <div className="App">
+          <PostList posts={this.state.postContent} />
+        </div>
     );
   }
 
