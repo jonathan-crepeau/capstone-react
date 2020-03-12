@@ -14,7 +14,8 @@ class Post extends React.Component {
     waterNeeds: null,
     lightNeeds: null,
     size: null,
-    cost: null
+    cost: null,
+    favID: null,
   }
 
   // NOTE - Favorite Button Click Event Functionality
@@ -76,10 +77,31 @@ class Post extends React.Component {
       .catch(err => console.log(err));;
   };
 
-  createOrder = async (event) => {
+  createOrder = async () => {
     let res = await axios.post(`${process.env.REACT_APP_API_URL}/orders/create`, this.state, { withCredentials: true })
-      .then(res => console.log('createOrder', res))
+      .then(res => {
+        console.log('createOrd', res)
+        this.orderFindFavorite();
+      })
       .catch(err => console.log(err));
+  };
+
+  orderFindFavorite = () => {
+    axios.get(`${process.env.REACT_APP_API_URL}/favorites/${this.state.originalPostId}`, { withCredentials: true })
+      .then(res => {
+        console.log('foundFav', res);
+        let favID = res.data[0]._id;
+        this.setState({ favID: favID });
+        console.log('stateFavID', this.state.favID);
+        this.orderDeleteFavorite();
+      })
+      .catch(err => console.log(err));
+  };
+
+  orderDeleteFavorite = () => {
+    axios.delete(`${process.env.REACT_APP_API_URL}/favorites/${this.state.favID}`, { withCredentials: true })
+    .then(res => console.log('deletedFav', res))
+    .catch(err => console.log(err));
   };
 
   render() {
