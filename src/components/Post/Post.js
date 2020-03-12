@@ -1,19 +1,26 @@
 import React from 'react';
-import { Button } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react';
+import axios from 'axios';
 
 import './Post.css';
 
 class Post extends React.Component {
   state = {
-    favorites: []
+    favorites: null
   }
   
   handleFavorite = event => {
     console.log('favorited!');
     this.setState({ favorites: null });
-    var postId = event.target.closest('.postInteraction');
-    console.log(postId);
-  }
+    let parentDiv = event.target.closest('.postInteraction');
+    console.log(parentDiv)
+    let postId = parentDiv.firstElementChild.textContent;
+    console.log(postId)
+    this.setState({ favorites: postId });
+    axios.post(`${process.env.REACT_APP_API_URL}/favorites/create`, this.state, { withCredentials: true })
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  };
   // handlefavorite (function)
   // setState favorite to null
   // select object (get ID of post)
@@ -37,7 +44,7 @@ class Post extends React.Component {
           <p>Cost: {this.props.post.cost}</p>
         </div>
         <div className="postInteraction">
-          <p className="hidden">ID: {this.props.post._id}</p>
+          <p className="hidden">{this.props.post._id}</p>
           <Button id="favoriteButton" onClick={this.handleFavorite}>Favorite</Button><Button id="purchaseButton">Purchase</Button>
         </div>
       </div>
