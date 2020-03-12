@@ -15,7 +15,7 @@ class PostFeed extends React.Component {
       .then(res => {
         console.log(res)
         this.setState({
-          postContent: res.data
+          postContent: res.data.filter(post => post.user !== localStorage.getItem('uid'))
         })
       })
       .catch(err => {
