@@ -17,6 +17,7 @@ class Post extends React.Component {
     cost: null
   }
 
+  // NOTE - Favorite Button Click Event Functionality
   handleFavorite = async (event) => {
     console.log('favorited!');
     this.setState({ originalPostId: null });
@@ -49,27 +50,37 @@ class Post extends React.Component {
       .catch(err => console.log(err));
   }
   
-  // handleFavorite = event => {
-  //   console.log('favorited!');
-  //   this.setState({ favorites: null });
-  //   let parentDiv = event.target.closest('.postInteraction');
-  //   console.log(parentDiv)
-  //   let postId = parentDiv.firstElementChild.textContent;
-  //   console.log(postId)
-  //   this.setState({ favorites: postId });
-  //   axios.post(`${process.env.REACT_APP_API_URL}/favorites/create`, this.state, { withCredentials: true })
-  //     .then(res => {
-  //       console.log(res);
-  //     })
-  //     .catch(err => console.log(err));
-  // };
+  // NOTE - Purchase Button Event Listener Functionality
+  handlePurchase = async (event) => {
+    console.log('purchased!')
+    this.setState({ originalPostId: null });
+    let parentDiv = event.target.closest('.postInteraction');
+    let postID = parentDiv.firstElementChild.textContent;
+    console.log(postID);
+    this.setState({ originalPostId: postID });
+    let rez = await axios.get(`${process.env.REACT_APP_API_URL}/posts/${this.state.originalPostId}`, { withCredentials: true })
+      .then(rez => {
+        console.log('orderRez', rez);
+        this.setState({
+          postAuthorId: rez.data.user,
+          title: rez.data.title,
+          userDescription: rez.data.userDescription,
+          plantType: rez.data.plantType,
+          waterNeeds: rez.data.waterNeeds,
+          lightNeeds: rez.data.lightNeeds,
+          size: rez.data.size,
+          cost: rez.data.cost,
+        })
+        this.createOrder();
+      })
+      .catch(err => console.log(err));;
+  };
 
-  // handlefavorite (function)
-  // setState favorite to null
-  // select object (get ID of post)
-  // setState favorites = id of post
-  // axios call with that as parameter (req.query?) ... dalton showed me this on wayfarer, may need to change route
-  // remove class, then add class to change color of button? (grey to pink? pink to pinker?)
+  createOrder = async (event) => {
+    let res = await axios.post(`${process.env.REACT_APP_API_URL}/orders/create`, this.state, { withCredentials: true })
+      .then(res => console.log('createOrder', res))
+      .catch(err => console.log(err));
+  };
 
   render() {
     return (
@@ -88,7 +99,7 @@ class Post extends React.Component {
         </div>
         <div className="postInteraction">
           <p className="hidden">{this.props.post._id}</p>
-          <Button id="favoriteButton" onClick={this.handleFavorite}>Favorite</Button><Button id="purchaseButton">Purchase</Button>
+          <Button id="favoriteButton" onClick={this.handleFavorite}>Favorite</Button><Button id="purchaseButton" onClick={this.handlePurchase} >Purchase</Button>
         </div>
       </div>
     );
