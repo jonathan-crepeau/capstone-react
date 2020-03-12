@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import PostList from '../PostList/PostList';
 import './Favorites.css';
-import Axios from 'axios';
+// import Axios from 'axios';
 
 class Favorites extends React.Component {
   state = {

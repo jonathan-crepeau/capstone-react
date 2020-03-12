@@ -11,3 +11,7 @@
   background-color: #87FF6E;
   color: black;
 }
+
+.hidden {
+  visibility: hidden;
+}

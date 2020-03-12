@@ -9,7 +9,10 @@ class Post extends React.Component {
   }
   
   handleFavorite = event => {
-    console.log('favorited!')
+    console.log('favorited!');
+    this.setState({ favorites: null });
+    var postId = event.target.closest('.postInteraction');
+    console.log(postId);
   }
   // handlefavorite (function)
   // setState favorite to null
@@ -34,7 +37,7 @@ class Post extends React.Component {
           <p>Cost: {this.props.post.cost}</p>
         </div>
         <div className="postInteraction">
-          {/* <p>ID: {this.post.id}</p> */}
+          <p className="hidden">ID: {this.props.post._id}</p>
           <Button id="favoriteButton" onClick={this.handleFavorite}>Favorite</Button><Button id="purchaseButton">Purchase</Button>
         </div>
       </div>

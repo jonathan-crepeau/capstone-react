@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import PostList from '../PostList/PostList';
 import AddPost from '../AddPost/AddPost';
-import EditProfile from '../EditProfile/EditProfile';
 
 class PostFeed extends React.Component {
   state = {
